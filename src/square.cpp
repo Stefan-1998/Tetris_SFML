@@ -37,6 +37,8 @@ Square::~Square()
 {
     std::cout<<"Wuerfel wurde zerstoert"<<'\n';
 
+    delete(m_DrawBody);
+
 
 }
 
