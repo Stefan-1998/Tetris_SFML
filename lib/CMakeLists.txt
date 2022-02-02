@@ -3,4 +3,5 @@ add_library(
 
     configGlobal.hpp
     square.hpp
+    playfield.hpp
     )
