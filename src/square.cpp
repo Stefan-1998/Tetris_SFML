@@ -4,21 +4,29 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <square.hpp>
+#include <iostream>
+
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include <configGlobal.hpp>
 
-Square::Square(int x, int y,sf::Color color):m_x(x),m_y(x),m_color(color)
+Square::Square(int x, int y,sf::Color color):m_x(x),m_y(y),m_color(color)
 {
  
     //Position Start
 
-    std::cout<<"Kreiiert2"<<std::endl;
     //Position startet mit 0
-    int x_offset = offsetLeft+m_x*blockWidth;
-    int y_offset = offsetLeft+m_y*blockHight;
+    int x_offset = position_leftWall+m_x*blockWidth;
+    int y_offset = position_upperWall+m_y*blockHight;
 
+    //Abstand zwischen den Blöcken
+    x_offset = x_offset + m_x*offsetLeft;
+    y_offset = y_offset + m_y*offsetUp;
+
+
+    //Blockgröße
     sf::Vector2f size;
     size.x=blockWidth;
     size.y=blockHight;
