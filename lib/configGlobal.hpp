@@ -26,7 +26,10 @@
 #define playfieldOffsetLeft 95
 #define playfieldOffsetUp 95
 
+#define sizeHightInBlocks 24
+#define sizeWidthInBlocks 12
+
 //Breite 12 Blöcke
-#define playfieldWidth 12*(blockWidth+offsetLeft)+offsetLeft
+#define playfieldWidth sizeWidthInBlocks*(blockWidth+offsetLeft)+offsetLeft
 //Höhe 24 Blöcke
-#define playfieldHight 24*(blockHight+offsetUp)+offsetUp
+#define playfieldHight sizeHightInBlocks*(blockHight+offsetUp)+offsetUp

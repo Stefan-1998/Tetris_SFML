@@ -9,6 +9,10 @@ class Tetrominos
         ~Tetrominos();
         void draw(sf::RenderWindow *w);
 
+        //0, wenn Fallen möglich
+        //-1 ansonsten
+        int fall();
+
     public:
         Square *block1; 
         Square *block2; 
