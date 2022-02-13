@@ -7,4 +7,5 @@ add_library(
     tetrominos.hpp
     tetrisPieces.hpp
     factoryTetrominos.hpp
+    statemachine.hpp
     )
