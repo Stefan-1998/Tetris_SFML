@@ -16,12 +16,18 @@ class Square
 
         void draw(sf::RenderWindow* window);
         void fall();
+        void moveLeft();
+        void moveRight();
         int get_x();
         int get_y();
 
         //0, wenn Fallen möglich ist
         //-1, ansonsten
         int canFall();
+
+        //0, wenn Fallen möglich ist
+        //-1, ansonsten
+        int canMoveSideway(bool left);
         
     private:
         //Position des Würfels
@@ -35,6 +41,8 @@ class Square
         //Hier übergabeParameter der Vektor mit den Square
         int checkForBlock();
         void calculateOffset(int *x_offset, int *y_offset);
+        int canMoveLeft();
+        int canMoveRight();
 
 };
 

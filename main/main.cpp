@@ -1,15 +1,8 @@
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Window.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
-#include <iostream>
-#include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <SFML/Graphics.hpp>
+#include <SFML/Window/Event.hpp>
 #include "../lib/configGlobal.hpp"
 #include "../lib/square.hpp"
 #include "../lib/playfield.hpp"
@@ -18,14 +11,19 @@
 #include "../lib/factoryTetrominos.hpp"
 #include "../lib/statemachine.hpp"
 
+#include <SFML/Window/Window.hpp>
+#include <iostream>
+
 int main ()
 {
 
-    std::cout<<"Start"<<std::endl;
     Playfield *field= new Playfield(playfieldWidth,playfieldHight);
     sf::RenderWindow window(sf::VideoMode(windowWidth,windowHight), "My Window");
-    sf::Keyboard keyboard; 
+    window.setPosition(sf::Vector2i(windowPositionsX,windowPositionsY));
 
+    //Tastaturinput
+    sf::Keyboard keyboard;
+    sf::Event event;
     
 
     //Interrupt für das Fallen des Tetrominos
@@ -41,11 +39,6 @@ int main ()
     bool loop=true;
     while(loop)
     {
-        //Ausschalten des Programmes
-        if(keyboard.isKeyPressed(sf::Keyboard::Q) )
-        {
-            loop=false;
-        }
 
         //Kreiieren neuer Tetrominos und Abändern der Statemaschine
         if(currentState==createPiece) 
@@ -53,7 +46,30 @@ int main ()
             currentPiece=FactoryTetrominos::createTetrominos();
             currentState=falling;
         }
+        
 
+        //Ausschalten des Programmes
+        if(keyboard.isKeyPressed(sf::Keyboard::Q))
+        {
+            loop=false;
+        }
+
+        //Holen der Event, wie Tastaturdruck
+        while(window.pollEvent(event))
+        {
+
+            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Left))
+            {
+                //moveLeft 
+                currentPiece->moveSideway(true);
+            }                
+
+            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Right))
+            {
+                //moveRigth 
+                currentPiece->moveSideway(false);
+            }                
+        }
 
         //Interrupt für das Fallen
         if(clock.getElapsedTime()>interruptTime)
@@ -73,6 +89,7 @@ int main ()
     
         //Darstellen des Bildes
         window.display();
+
     }
     
 

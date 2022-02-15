@@ -59,6 +59,21 @@ void Square::fall()
     m_DrawBody->setPosition(x_offset,y_offset);
 }
 
+void Square::moveLeft()
+{
+    m_x--;
+    int x_offset,y_offset;
+    calculateOffset(&x_offset,&y_offset);
+    m_DrawBody->setPosition(x_offset,y_offset);
+}
+
+void Square::moveRight()
+{
+    m_x++;
+    int x_offset,y_offset;
+    calculateOffset(&x_offset,&y_offset);
+    m_DrawBody->setPosition(x_offset,y_offset);
+}
 //Simple getter-Methode
 int Square::get_x()
 {
@@ -72,6 +87,26 @@ int Square::get_y()
 
 
 
+
+int Square::canFall()
+{
+    int ret1=checkBottom();
+    return ret1;
+}
+
+int Square::canMoveSideway(bool left)
+{
+    if(left)
+    {
+        return canMoveLeft();
+    }
+    else
+    {
+        return canMoveRight();
+    }
+}
+
+
 //0, wenn Block nicht am Boden ist
 //-1, ansonsten
 int Square::checkBottom()
@@ -83,11 +118,7 @@ int Square::checkBottom()
     return 0;
            
 }
-int Square::canFall()
-{
-    int ret1=checkBottom();
-    return ret1;
-}
+
 void Square::calculateOffset(int *x_offset, int *y_offset)
 {
     
@@ -100,3 +131,24 @@ void Square::calculateOffset(int *x_offset, int *y_offset)
     *y_offset = *y_offset + m_y*offsetUp;
 
 }
+
+int Square::canMoveLeft()
+{
+    if(m_x>0)
+        return 0;
+    else
+    {
+        return -1;
+    }
+}
+
+int Square::canMoveRight()
+{
+    if(m_x<sizeWidthInBlocks-1)
+        return 0;
+    else
+    {
+        return -1;
+    }
+}
+

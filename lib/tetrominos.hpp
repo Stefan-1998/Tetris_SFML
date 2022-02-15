@@ -8,10 +8,13 @@ class Tetrominos
         void move();
         ~Tetrominos();
         void draw(sf::RenderWindow *w);
+        
 
         //0, wenn Fallen möglich
         //-1 ansonsten
         int fall();
+
+        void moveSideway(bool left);
 
     public:
         Square *block1; 

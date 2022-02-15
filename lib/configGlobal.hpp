@@ -4,7 +4,8 @@
 //Fenster
 #define windowHight 700
 #define windowWidth 700
-
+#define windowPositionsX 500
+#define windowPositionsY 200
 
 //Block
 #define blockWidth 15
