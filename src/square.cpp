@@ -11,6 +11,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <memory>
+#include <vector>
 
 Square::Square(int x, int y,sf::Color color):m_x(x),m_y(y),m_color(color)
 {
@@ -88,10 +90,15 @@ int Square::get_y()
 
 
 
-int Square::canFall()
+int Square::canFall(std::vector<std::shared_ptr<Square>> *blocks)
 {
     int ret1=checkBottom();
-    return ret1;
+    int ret2=checkForBlock(blocks);
+    if(ret1+ret2<0)
+    {
+        return -1;
+    }
+    return 0;
 }
 
 int Square::canMoveSideway(bool left)
@@ -117,6 +124,21 @@ int Square::checkBottom()
     }
     return 0;
            
+}
+
+//0, wenn Block nicht am Boden ist
+//-1, ansonsten
+int Square::checkForBlock(std::vector<std::shared_ptr<Square>> *blocks)
+{
+    for(int i=0;i<blocks->size();i++)
+    {
+       if(m_y+1==blocks->at(i)->get_y())
+       {
+            return -1;
+       }
+        
+    }
+    return 0;
 }
 
 void Square::calculateOffset(int *x_offset, int *y_offset)

@@ -77,7 +77,7 @@ int main ()
         {   
             //Fallesn
             int canFall;
-            canFall=currentPiece->fall();
+            canFall=currentPiece->fall(&field->blocks);
 
             if(canFall!=0)
             {

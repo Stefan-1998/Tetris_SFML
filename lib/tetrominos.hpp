@@ -13,7 +13,7 @@ class Tetrominos
 
         //0, wenn Fallen möglich
         //-1 ansonsten
-        int fall();
+        int fall(std::vector<std::shared_ptr<Square>>*blocks);
 
         void moveSideway(bool left);
 

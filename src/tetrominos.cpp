@@ -1,6 +1,7 @@
 #include "../lib/tetrominos.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
+#include <vector>
 
 
 
@@ -24,13 +25,13 @@ void Tetrominos::draw(sf::RenderWindow *w)
     block4->draw(w);
 }
 
-int Tetrominos::fall()
+int Tetrominos::fall(std::vector<std::shared_ptr<Square>> *blocks)
 {
     int temp1,temp2,temp3,temp4;
-    temp1=block1->canFall();
-    temp2=block2->canFall();
-    temp3=block3->canFall();
-    temp4=block4->canFall();
+    temp1=block1->canFall(blocks);
+    temp2=block2->canFall(blocks);
+    temp3=block3->canFall(blocks);
+    temp4=block4->canFall(blocks);
 
 
     int sum=temp1+temp2+temp3+temp4; 

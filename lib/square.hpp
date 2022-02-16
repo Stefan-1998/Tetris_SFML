@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <memory>
+#include <vector>
 
 
 
@@ -23,7 +25,7 @@ class Square
 
         //0, wenn Fallen möglich ist
         //-1, ansonsten
-        int canFall();
+        int canFall(std::vector<std::shared_ptr<Square>>*blocks);
 
         //0, wenn Fallen möglich ist
         //-1, ansonsten
@@ -38,8 +40,7 @@ class Square
         sf::RectangleShape *m_DrawBody;
 
         int checkBottom();
-        //Hier übergabeParameter der Vektor mit den Square
-        int checkForBlock();
+        int checkForBlock(std::vector<std::shared_ptr<Square>> *blocks);
         void calculateOffset(int *x_offset, int *y_offset);
         int canMoveLeft();
         int canMoveRight();
