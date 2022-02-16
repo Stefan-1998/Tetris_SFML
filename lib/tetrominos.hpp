@@ -1,5 +1,6 @@
 #include "square.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <memory>
 
 
 class Tetrominos
@@ -17,9 +18,9 @@ class Tetrominos
         void moveSideway(bool left);
 
     public:
-        Square *block1; 
-        Square *block2; 
-        Square *block3; 
-        Square *block4; 
+        std::shared_ptr<Square> block1; 
+        std::shared_ptr<Square> block2; 
+        std::shared_ptr<Square> block3; 
+        std::shared_ptr<Square> block4; 
 
 };

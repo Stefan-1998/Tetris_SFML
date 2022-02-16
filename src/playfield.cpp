@@ -6,6 +6,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <SFML/Graphics/Color.hpp>
+#include <vector>
 
 Playfield::Playfield(int width, int hight):m_width(width),m_hight(hight)
 {
@@ -25,6 +26,8 @@ Playfield::Playfield(int width, int hight):m_width(width),m_hight(hight)
     frame->setPosition(playfieldOffsetLeft-5,playfieldOffsetUp-5);
     frame->setFillColor(sf::Color::Blue);
         
+    //std::vector<std::shared_ptr<Square>> temp;
+    //blocks=&temp;
 }
 
 
@@ -32,6 +35,9 @@ Playfield::~Playfield()
 {
     delete( playfield);
     delete( frame);
+    blocks.clear();
+    
+    //delete blocks;
     std::cout<<"Spielfeld wurde destroyed"<<std::endl;
     
 }

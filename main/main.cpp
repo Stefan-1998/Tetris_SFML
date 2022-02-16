@@ -43,6 +43,7 @@ int main ()
         //Kreiieren neuer Tetrominos und Abändern der Statemaschine
         if(currentState==createPiece) 
         {
+            std::cout<<"Kreiere Block"<<std::endl;
             currentPiece=FactoryTetrominos::createTetrominos();
             currentState=falling;
         }
@@ -78,6 +79,17 @@ int main ()
             int canFall;
             canFall=currentPiece->fall();
 
+            if(canFall!=0)
+            {
+                field->blocks.push_back(currentPiece->block1);
+                field->blocks.push_back(currentPiece->block2);
+                field->blocks.push_back(currentPiece->block3);
+                field->blocks.push_back(currentPiece->block4);
+
+                
+                delete currentPiece;
+                currentState=createPiece;
+            }
             clock.restart();
         }
 
@@ -85,7 +97,20 @@ int main ()
         window.clear();
         //Zeichnen des Spielfeldes
         field->draw(&window);
-        currentPiece->draw(&window);
+
+
+        //Zeichnen der Abgespeicherten Blöcke
+        int safedBlocksSize=field->blocks.size();
+        for(int i=0;i<safedBlocksSize;i++)
+        {
+            field->blocks.at(i)->draw(&window);
+        }
+        
+
+        if(currentState==falling)
+        {
+            currentPiece->draw(&window);
+        }
     
         //Darstellen des Bildes
         window.display();

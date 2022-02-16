@@ -8,10 +8,11 @@
 Tetrominos::~Tetrominos()
 {
     std::cout<<"delete Tetrominos"<<std::endl;
+    /*
     delete block1;
     delete block2;
     delete block3;
-    delete block4;
+    delete block4;*/
 }
 
 

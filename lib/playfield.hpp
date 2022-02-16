@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <memory>
 #include "square.hpp"
 
 class Playfield
@@ -10,7 +11,7 @@ class Playfield
         Playfield(int width, int hight);
         ~Playfield();
         void draw(sf::RenderWindow * window);
-        std::vector<Square> * blocks;
+        std::vector <std::shared_ptr<Square>>  blocks;
 
 
     private:
