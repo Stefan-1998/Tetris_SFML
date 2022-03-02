@@ -13,7 +13,7 @@ class Tetrominos
         Tetrominos();
         void move();
         void draw(sf::RenderWindow *w);
-        void rotate(std::vector<std::shared_ptr<Square>> *blocks);
+        virtual void rotate(std::vector<std::shared_ptr<Square>> *blocks);
         
 
         //0, wenn Fallen möglich
@@ -29,15 +29,12 @@ class Tetrominos
         std::shared_ptr<Square> block4; 
 
 
-    private:
-
-        const int rotationState[4]={0,90,180,270};
-        const int *rotationPtr;
-        void advancePtr();
-
         //return 0 when possible
         //-1 else
         int checkPosition(int *x,int *y,std::vector<std::shared_ptr<Square>> *blocks);
+    private:
+
+
 
 
         //returns 0 when possible

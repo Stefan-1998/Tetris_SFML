@@ -6,7 +6,6 @@
 
 Tetrominos::Tetrominos()
 {
-    rotationPtr=&rotationState[0];
 }
 
 
@@ -25,6 +24,7 @@ void Tetrominos::draw(sf::RenderWindow *w)
 
 void Tetrominos::rotate(std::vector<std::shared_ptr<Square>> *blocks)
 {
+     
     
     int ret=0;
     ret=canRotate(blocks);
@@ -114,17 +114,6 @@ void Tetrominos::moveSideway(bool left)
 
 
 
-void Tetrominos::advancePtr()
-{
-    if(rotationPtr== & rotationState[3])
-    {
-        rotationPtr=&rotationState[0];
-    }
-    else 
-    {
-        rotationPtr++;
-    }
-}
 
 int Tetrominos::checkPosition(int *x, int*y, std::vector<std::shared_ptr<Square>> *blocks)
 {
