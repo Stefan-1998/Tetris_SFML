@@ -87,7 +87,21 @@ int Square::get_y()
     return m_y;
 }
 
+void Square::set_x(int x)
+{
+    m_x=x;
+    int x_offset,y_offset;
+    calculateOffset(&x_offset,&y_offset);
+    m_DrawBody->setPosition(x_offset,y_offset);
+}
 
+void Square::set_y(int y)
+{
+    m_y=y;
+    int x_offset,y_offset;
+    calculateOffset(&x_offset,&y_offset);
+    m_DrawBody->setPosition(x_offset,y_offset);
+}
 
 
 int Square::canFall(std::vector<std::shared_ptr<Square>> *blocks)

@@ -70,6 +70,12 @@ int main ()
                 //moveRigth 
                 currentPiece->moveSideway(false);
             }                
+
+            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Up))
+            {
+                //moveRigth 
+                currentPiece->rotate(&field->blocks);
+            }                
         }
 
         //Interrupt für das Fallen

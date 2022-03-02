@@ -22,6 +22,8 @@ class Square
         void moveRight();
         int get_x();
         int get_y();
+        void set_x(int x);
+        void set_y(int y);
 
         //0, wenn Fallen möglich ist
         //-1, ansonsten

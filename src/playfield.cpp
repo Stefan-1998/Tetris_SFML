@@ -25,9 +25,9 @@ Playfield::Playfield(int width, int hight):m_width(width),m_hight(hight)
     frame->setSize(size);
     frame->setPosition(playfieldOffsetLeft-5,playfieldOffsetUp-5);
     frame->setFillColor(sf::Color::Blue);
+
+    blocks.clear();
         
-    //std::vector<std::shared_ptr<Square>> temp;
-    //blocks=&temp;
 }
 
 
