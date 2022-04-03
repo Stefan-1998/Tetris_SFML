@@ -1,4 +1,4 @@
 #pragma once
 
 
-enum StateMachine{createPiece,falling};
+enum StateMachine{createPiece,falling,gameOver};

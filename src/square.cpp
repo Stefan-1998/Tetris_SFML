@@ -40,11 +40,7 @@ Square::Square(int x, int y,sf::Color color):m_x(x),m_y(y),m_color(color)
 
 Square::~Square()
 {
-    std::cout<<"Wuerfel wurde zerstoert"<<'\n';
-
     delete(m_DrawBody);
-
-
 }
 
 void Square::draw(sf::RenderWindow * window)

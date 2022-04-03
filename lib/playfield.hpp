@@ -13,9 +13,11 @@ class Playfield
         void draw(sf::RenderWindow * window);
         void sort();
         void checkTetris();
-        std::vector <std::shared_ptr<Square>>  blocks;
-
         void print();
+
+        
+
+        std::vector <std::shared_ptr<Square>>  blocks;
 
     private:
        int m_width; 

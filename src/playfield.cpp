@@ -45,9 +45,6 @@ Playfield::~Playfield()
     delete( frame);
     blocks.clear();
     
-    //delete blocks;
-    std::cout<<"Spielfeld wurde destroyed"<<std::endl;
-    
 }
 
 void Playfield::draw(sf::RenderWindow * window)
@@ -177,7 +174,6 @@ void Playfield::checkTetris()
     {
         iter=blocks.begin();
 
-        std::cout<<buffer[i]<<std::endl;
         do
         {
             currentBlock=*iter;

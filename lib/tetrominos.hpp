@@ -31,6 +31,11 @@ class Tetrominos
         //return 0 when possible
         //-1 else
         int checkPosition(int *x,int *y,std::vector<std::shared_ptr<Square>> *blocks);
+
+
+        //return 0 when possible
+        //-1 else
+        int checkOwnPosition(std::vector<std::shared_ptr<Square>> *blocks);
     private:
 
 

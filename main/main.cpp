@@ -17,9 +17,7 @@
 
 /*
  *TO-Do
-    Kolliesionsabfrage bei seitwärts Bewegungen
     Drehen ist noch sehr "unintuitiv"
-    Abbruch
  *
  *
  * */
@@ -55,9 +53,15 @@ int main ()
         //Kreiieren neuer Tetrominos und Abändern der Statemaschine
         if(currentState==createPiece) 
         {
-            std::cout<<"Kreiere Block"<<std::endl;
             currentPiece=FactoryTetrominos::createTetrominos();
-            currentState=falling;
+            if(currentPiece->checkOwnPosition(&field->blocks)==-1)
+            {
+                currentState=gameOver;
+            }
+            else
+            {
+                currentState=falling;
+            }
         }
         
 
@@ -187,7 +191,16 @@ int main ()
         //Darstellen des Bildes
         window.display();
 
+        if(currentState==gameOver)
+        {
+            break;
+        }
+
     }
+    delete field;
+    delete currentPiece;
+    window.close();
+    
     
 
     return 0;

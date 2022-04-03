@@ -30,7 +30,6 @@ void Tetrominos::rotate(std::vector<std::shared_ptr<Square>> *blocks)
     ret=canRotate(blocks);
 
 
-    std::cout<<"Rotiere"<<std::endl;
     if(ret==0)
     {
         rotatePiece();
@@ -113,6 +112,21 @@ void Tetrominos::moveSideway(bool left,std::vector<std::shared_ptr<Square>> *blo
 }
 
 
+int Tetrominos::checkOwnPosition(std::vector<std::shared_ptr<Square>> *blocks)
+{
+    for(int i=0;i<blocks->size();i++)
+    {
+        if(blocks->at(i)->get_x()==block1->get_x()&&blocks->at(i)->get_y()==block1->get_y())
+            return -1;
+        if(blocks->at(i)->get_x()==block2->get_x()&&blocks->at(i)->get_y()==block2->get_y())
+            return -1;
+        if(blocks->at(i)->get_x()==block3->get_x()&&blocks->at(i)->get_y()==block3->get_y())
+            return -1;
+        if(blocks->at(i)->get_x()==block4->get_x()&&blocks->at(i)->get_y()==block4->get_y())
+            return -1;
+    }
+    return 0;
+}
 
 
 int Tetrominos::checkPosition(int *x, int*y, std::vector<std::shared_ptr<Square>> *blocks)
@@ -129,7 +143,6 @@ int Tetrominos::checkPosition(int *x, int*y, std::vector<std::shared_ptr<Square>
 
     if(blocks->empty())
     {
-        //std::cout<<"Is Empty"<<std::endl;
         return 0;
     }
     int test=blocks->size(); 
