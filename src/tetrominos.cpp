@@ -65,16 +65,16 @@ int Tetrominos::fall(std::vector<std::shared_ptr<Square>> *blocks)
     
 }
 
-void Tetrominos::moveSideway(bool left)
+void Tetrominos::moveSideway(bool left,std::vector<std::shared_ptr<Square>> *blocks)
 {
     int temp1, temp2, temp3, temp4;
     int sum;
     if(left)
     {
-        temp1=block1->canMoveSideway(true);
-        temp2=block2->canMoveSideway(true);
-        temp3=block3->canMoveSideway(true);
-        temp4=block4->canMoveSideway(true);
+        temp1=block1->canMoveSideway(true,blocks);
+        temp2=block2->canMoveSideway(true,blocks);
+        temp3=block3->canMoveSideway(true,blocks);
+        temp4=block4->canMoveSideway(true,blocks);
         
         sum= temp1+ temp2 + temp3 + temp4;
 
@@ -91,10 +91,10 @@ void Tetrominos::moveSideway(bool left)
     } 
     else
     {
-        temp1=block1->canMoveSideway(false);
-        temp2=block2->canMoveSideway(false);
-        temp3=block3->canMoveSideway(false);
-        temp4=block4->canMoveSideway(false);
+        temp1=block1->canMoveSideway(false,blocks);
+        temp2=block2->canMoveSideway(false,blocks);
+        temp3=block3->canMoveSideway(false,blocks);
+        temp4=block4->canMoveSideway(false,blocks);
         
         sum= temp1+ temp2 + temp3 + temp4;
 
@@ -135,7 +135,7 @@ int Tetrominos::checkPosition(int *x, int*y, std::vector<std::shared_ptr<Square>
     int test=blocks->size(); 
     for(int i=0;i<blocks->size();i++)
     {
-       if(*y==blocks->at(i)->get_y()&&*x==blocks->at(i)->get_x())
+       if((*y==blocks->at(i)->get_y())&&(*x==blocks->at(i)->get_x()))
        {
             return -1;
        }

@@ -115,15 +115,15 @@ int Square::canFall(std::vector<std::shared_ptr<Square>> *blocks)
     return 0;
 }
 
-int Square::canMoveSideway(bool left)
+int Square::canMoveSideway(bool left,std::vector<std::shared_ptr<Square>> *blocks)
 {
     if(left)
     {
-        return canMoveLeft();
+        return canMoveLeft(blocks);
     }
     else
     {
-        return canMoveRight();
+        return canMoveRight(blocks);
     }
 }
 
@@ -146,10 +146,13 @@ int Square::checkForBlock(std::vector<std::shared_ptr<Square>> *blocks)
 {
     for(int i=0;i<blocks->size();i++)
     {
-       if(m_y+1==blocks->at(i)->get_y())
-       {
-            return -1;
-       }
+        if(m_y+1==blocks->at(i)->get_y())
+        {
+            if(m_x==blocks->at(i)->get_x())
+            {
+                return -1;
+            }
+        }
         
     }
     return 0;
@@ -168,8 +171,13 @@ void Square::calculateOffset(int *x_offset, int *y_offset)
 
 }
 
-int Square::canMoveLeft()
+int Square::canMoveLeft(std::vector<std::shared_ptr<Square>> *blocks)
 {
+    for(int i=0;i<blocks->size();i++)
+    {
+        if(m_x-1==blocks->at(i)->get_x()&& m_y==blocks->at(i)->get_y())
+            return -1;
+    }
     if(m_x>0)
         return 0;
     else
@@ -178,8 +186,13 @@ int Square::canMoveLeft()
     }
 }
 
-int Square::canMoveRight()
+int Square::canMoveRight(std::vector<std::shared_ptr<Square>> *blocks)
 {
+    for(int i=0;i<blocks->size();i++)
+    {
+        if(m_x+1==blocks->at(i)->get_x()&& m_y==blocks->at(i)->get_y())
+            return -1;
+    }
     if(m_x<sizeWidthInBlocks-1)
         return 0;
     else

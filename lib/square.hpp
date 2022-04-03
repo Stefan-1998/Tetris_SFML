@@ -31,7 +31,7 @@ class Square
 
         //0, wenn Fallen möglich ist
         //-1, ansonsten
-        int canMoveSideway(bool left);
+        int canMoveSideway(bool left,std::vector<std::shared_ptr<Square>> *blocks);
         
     private:
         //Position des Würfels
@@ -44,8 +44,8 @@ class Square
         int checkBottom();
         int checkForBlock(std::vector<std::shared_ptr<Square>> *blocks);
         void calculateOffset(int *x_offset, int *y_offset);
-        int canMoveLeft();
-        int canMoveRight();
+        int canMoveLeft(std::vector<std::shared_ptr<Square>> *blocks);
+        int canMoveRight(std::vector<std::shared_ptr<Square>> *blocks);
 
 };
 

@@ -14,12 +14,24 @@
 #include <SFML/Window/Window.hpp>
 #include <iostream>
 
+
+/*
+ *TO-Do
+    Kolliesionsabfrage bei seitwärts Bewegungen
+    Drehen ist noch sehr "unintuitiv"
+    Abbruch
+ *
+ *
+ * */
+
 int main ()
 {
 
     Playfield *field= new Playfield(playfieldWidth,playfieldHight);
     sf::RenderWindow window(sf::VideoMode(windowWidth,windowHight), "My Window");
     window.setPosition(sf::Vector2i(windowPositionsX,windowPositionsY));
+
+    bool enableInterrupt=true; //Probleme mit Free
 
     //Tastaturinput
     sf::Keyboard keyboard;
@@ -58,44 +70,98 @@ int main ()
         //Holen der Event, wie Tastaturdruck
         while(window.pollEvent(event))
         {
-
-            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Left))
+            if(currentState==falling)
             {
-                //moveLeft 
-                currentPiece->moveSideway(true);
-            }                
+                if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Left))
+                {
+                    if(enableInterrupt)
+                    {
+                        //moveLeft 
+                        currentPiece->moveSideway(true,&field->blocks);
+                    }
+                }                
 
-            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Right))
-            {
-                //moveRigth 
-                currentPiece->moveSideway(false);
-            }                
+                if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Right))
+                {
+                    if(enableInterrupt)
+                    {
+                        //moveRigth 
+                        currentPiece->moveSideway(false,&field->blocks);
+                    }
+                }                
 
-            if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Up))
-            {
-                //moveRigth 
-                currentPiece->rotate(&field->blocks);
-            }                
+                if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Up))
+                {
+                    if(enableInterrupt)
+                    {
+                        //moveRigth 
+                        currentPiece->rotate(&field->blocks);
+                    }
+                }                
+                if((event.type==sf::Event::KeyPressed) &&(event.key.code==sf::Keyboard::Down))
+                {
+                    if(enableInterrupt)
+                    {
+                        if(currentPiece!=NULL)
+                        {
+                            //moveRigth 
+                            int canFall;
+                            canFall=currentPiece->fall(&field->blocks);
+                            if(canFall!=0)
+                            {
+                                field->blocks.push_back(currentPiece->block1);
+                                field->blocks.push_back(currentPiece->block2);
+                                field->blocks.push_back(currentPiece->block3);
+                                field->blocks.push_back(currentPiece->block4);
+
+                                delete currentPiece;
+
+                                field->sort();
+                                field->checkTetris();
+                    
+
+                                currentState=createPiece;
+                                clock.restart();
+                                
+                            }
+                        }
+                    }
+                }                
+            }
         }
 
         //Interrupt für das Fallen
         if(clock.getElapsedTime()>interruptTime)
         {   
-            //Fallesn
-            int canFall;
-            canFall=currentPiece->fall(&field->blocks);
-
-            if(canFall!=0)
+            enableInterrupt=false;
+            if(currentState==falling)
             {
-                field->blocks.push_back(currentPiece->block1);
-                field->blocks.push_back(currentPiece->block2);
-                field->blocks.push_back(currentPiece->block3);
-                field->blocks.push_back(currentPiece->block4);
+                if(currentPiece!=NULL)
+                {
+                    //Fallesn
+                    int canFall;
+                    canFall=currentPiece->fall(&field->blocks);
 
-                
-                delete currentPiece;
-                currentState=createPiece;
+                    if(canFall!=0)
+                    {
+                        field->blocks.push_back(currentPiece->block1);
+                        field->blocks.push_back(currentPiece->block2);
+                        field->blocks.push_back(currentPiece->block3);
+                        field->blocks.push_back(currentPiece->block4);
+
+                        delete currentPiece;
+
+                        field->sort();
+                        field->checkTetris();
+
+
+                        currentState=createPiece;
+                        clock.restart();
+
+                    }
+                }
             }
+            enableInterrupt=true;
             clock.restart();
         }
 

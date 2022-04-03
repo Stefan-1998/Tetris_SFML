@@ -3,7 +3,7 @@
 #include "tetrominos.hpp"
 #include <vector>
 
-class L_Piece:public virtual Tetrominos
+class L_Piece:public Tetrominos
 {
     public:
         L_Piece(sf::Color c);

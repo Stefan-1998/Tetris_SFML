@@ -11,7 +11,6 @@ class Tetrominos
     public:
         ~Tetrominos();
         Tetrominos();
-        void move();
         void draw(sf::RenderWindow *w);
         virtual void rotate(std::vector<std::shared_ptr<Square>> *blocks);
         
@@ -20,7 +19,7 @@ class Tetrominos
         //-1 ansonsten
         int fall(std::vector<std::shared_ptr<Square>> *blocks);
 
-        void moveSideway(bool left);
+        void moveSideway(bool left,std::vector<std::shared_ptr<Square>> *blocks);
 
 
         std::shared_ptr<Square> block1; 
@@ -48,6 +47,16 @@ class Tetrominos
 
 
         //Cacluclates the position of a block after 90° rotations
+        //
+        //
+        //  |123|           |741|
+        //  |456|   ->      |852|
+        //  |789|   90°     |963|
+        //
+        //Jedes Tetromino (I-Tetromino wird exktra rotiert) passt om doe 3x3 Matrix
+        //Die Drehung der Poositionen kann mit einer mathematischen Formel 
+        //dargestellt werden. Mit Modulo und Geteilt und den Offset 
+        //kann die neue Position der Blöcke berechnet werden 
         void calculateRotation(int blockNumber,int *x,int *y);
             
 
